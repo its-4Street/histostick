@@ -1,0 +1,73 @@
+/*
+ * Histostick: the chart's own styles. This file and histostick.js are all the chart needs.
+ * Everything is scoped under .hs (the figure the chart draws). Recolour it by setting these variables on .hs
+ * or on any element around it.
+ */
+.hs {
+  --hs-bg: #282e39;        /* callouts and menus */
+  --hs-surface: #2f3543;   /* what the chart sits on: painted behind the pinned axis and the count labels */
+  --hs-line: #434b5d;      /* borders, row stripes, the empty part of the slider */
+  --hs-ink: #ffffff;       /* text, the median tick */
+  --hs-muted: #9aa0ad;     /* axis labels, the wick */
+  --hs-accent: #e84a47;    /* bars, the chosen span on the slider */
+  --hs-tracking: 0.18em;
+  --hs-sans: "Inter Tight", Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --hs-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  margin: 0;
+  min-width: 0;
+  font-family: var(--hs-sans);
+  color: var(--hs-ink);
+}
+.hs *, .hs *::before { box-sizing: border-box; }
+.hs-caption { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; margin-bottom: 8px; }
+.hs-title { font-family: var(--hs-mono); font-size: 11px; letter-spacing: var(--hs-tracking); text-transform: uppercase; color: var(--hs-ink); }
+.hs-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; font-size: 11px; color: var(--hs-muted); }
+.hs-key { display: flex; align-items: center; gap: 6px; }
+
+/* menus and the year slider */
+.hs-controls { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 10px; }
+.hs-control { display: flex; align-items: center; gap: 8px; font-family: var(--hs-mono); font-size: 10px; letter-spacing: var(--hs-tracking); text-transform: uppercase; color: var(--hs-muted); }
+.hs-control select { padding: 4px 8px; border: 1px solid var(--hs-line); border-radius: 4px; background: var(--hs-bg); color: var(--hs-ink); font: 12px var(--hs-sans); letter-spacing: 0; text-transform: none; cursor: pointer; }
+.hs-control select:focus-visible { outline: 1px solid var(--hs-ink); outline-offset: 1px; }
+.hs-span { gap: 10px; }
+.hs-slider { position: relative; width: 190px; height: 20px; --lo: 0%; --hi: 100%; }
+.hs-slider::before { content: ""; position: absolute; left: 8px; right: 8px; top: 9px; height: 2px; border-radius: 1px; background: linear-gradient(to right, var(--hs-line) var(--lo), var(--hs-accent) var(--lo), var(--hs-accent) var(--hi), var(--hs-line) var(--hi)); }
+.hs-slider input { position: absolute; inset: 0; width: 100%; height: 20px; margin: 0; padding: 0; background: none; pointer-events: none; -webkit-appearance: none; appearance: none; }
+.hs-slider input::-webkit-slider-runnable-track { height: 20px; background: none; }
+.hs-slider input::-moz-range-track { height: 20px; background: none; }
+.hs-slider input::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; margin-top: 2px; border: 2px solid var(--hs-surface); border-radius: 50%; background: var(--hs-ink); cursor: grab; pointer-events: auto; }
+.hs-slider input::-moz-range-thumb { width: 12px; height: 12px; border: 2px solid var(--hs-surface); border-radius: 50%; background: var(--hs-ink); cursor: grab; pointer-events: auto; }
+.hs-slider input:focus-visible { outline: none; }
+.hs-slider input:focus-visible::-webkit-slider-thumb { outline: 1px solid var(--hs-ink); outline-offset: 2px; }
+.hs-slider input:focus-visible::-moz-range-thumb { outline: 1px solid var(--hs-ink); outline-offset: 2px; }
+.hs-span-text { min-width: 9ch; font: 12px var(--hs-sans); letter-spacing: 0; text-transform: none; color: var(--hs-ink); }
+
+/* the plot */
+.hs-empty { margin: 0; padding: 28px 0; font-size: 13px; color: var(--hs-muted); }
+.hs-wrap { position: relative; max-width: 100%; overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--hs-line) transparent; }
+.hs-plot { display: flex; width: max-content; }
+.hs-plot svg { display: block; flex: none; max-width: none; }
+/* the band axis stays in view while the columns scroll under it */
+.hs-yaxis { position: sticky; left: 0; z-index: 1; flex: none; background: var(--hs-surface); }
+
+.hs-row { fill: var(--hs-line); fill-opacity: 0.25; }
+.hs-row-clear, .hs-hit { fill: transparent; }
+.hs-axis { fill: var(--hs-muted); font-family: var(--hs-mono); font-size: 10px; }
+.hs-n { fill: var(--hs-muted); font-family: var(--hs-mono); font-size: 9px; }
+.hs-count { fill: var(--hs-ink); font-family: var(--hs-mono); font-size: 11px; font-weight: 600; cursor: pointer; paint-order: stroke; stroke: var(--hs-surface); stroke-width: 4px; stroke-linejoin: round; }
+.hs-bracket { fill: none; stroke: var(--hs-muted); stroke-width: 1; }
+.hs-group { fill: var(--hs-ink); font-family: var(--hs-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; }
+.hs-wick { stroke: var(--hs-muted); stroke-width: 1; pointer-events: none; }
+.hs-median { stroke: var(--hs-ink); stroke-width: 1.25; stroke-dasharray: 3 2; pointer-events: none; }
+.hs-bar { cursor: pointer; }
+.hs-bar-face { fill: var(--hs-accent); opacity: 0.9; }
+.hs-bar-top { fill: var(--hs-accent); opacity: 0.5; }
+.hs-bar-side { fill: var(--hs-accent); opacity: 0.3; }
+
+/* the callout */
+.hs-tip { position: absolute; z-index: 10; min-width: 12rem; padding: 8px 12px; border: 1px solid var(--hs-line); border-radius: 6px; background: var(--hs-bg); color: var(--hs-ink); font-size: 12px; pointer-events: none; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.3), 0 8px 10px -6px rgb(0 0 0 / 0.3); }
+.hs-tip p { margin: 0; }
+.hs-tip .hs-tip-series { margin-bottom: 4px; font-family: var(--hs-mono); font-size: 10px; letter-spacing: var(--hs-tracking); text-transform: uppercase; color: var(--hs-accent); }
+.hs-tip-line { display: flex; justify-content: space-between; gap: 16px; line-height: 1.5; }
+.hs-tip-line span { color: var(--hs-muted); }
+.hs-tip-line b { font-weight: 600; white-space: nowrap; }

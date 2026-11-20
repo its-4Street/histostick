@@ -1,0 +1,49 @@
+# Histostick™
+
+> A histogram and a candlestick in one chart, offered as open source by 4STREET. One column per series; inside each column a bar for every value band (bar width is how many values fall in it), a line from the smallest value to the largest, and a tick at the median. Plain JavaScript and SVG, no packages, no build step.
+
+Source repository: https://github.com/its-4Street/histostick
+
+Machine-readable description of this project, its publisher and its bundled data: `codemeta.json` (the same content is embedded in `index.html` as JSON-LD).
+
+## Use it
+
+- The chart is two files: `src/histostick.js` and `src/histostick.css`. Copy both; nothing else is needed.
+- `mountChart(element, { title, seriesName, columns })` draws it. A column is `{ key, label, group?, values: [{ v, date? }] }`.
+- Options: `bands` (`[[lo, hi, label], ...]`), `scale` (`"log"` or `"linear"`), `format`, `sort`, `grouping` (`"none"`, `"grouped"`, `"combined"`), `widthBy` (`"count"` or `"share"`), `unit`, `bandNoun`, `valueNoun`, `showTotal`, `bandRange`, `controls`, `time`.
+- `buildChart(options)` returns the SVG markup and the numbers without a browser.
+- Recolour it by setting the `--hs-` variables listed at the top of `src/histostick.css`.
+- To see the demo: serve this folder with any static web server (`node scripts/serve.mjs`) and open it.
+- To check it, including that it is self-contained: `node scripts/verify.mjs`.
+
+## What it will and will not do on your machine
+
+- No packages, no install step, no build step. There is no `package.json`.
+- In the browser it loads only files from its own folder. It sends nothing anywhere and stores nothing.
+- The scripts use Node built-ins only. `scripts/serve.mjs` listens on this machine only (127.0.0.1).
+- See `SECURITY.md`.
+
+## Files
+
+- `README.md`: what it is, how to run it, the data
+- `src/histostick.js`, `src/histostick.css`: the chart
+- `src/page.js`, `src/style.css`, `index.html`: the demonstration page
+- `src/sec-data.js`, `src/sec-columns.js`: SEC respondents sample and its columns
+- `src/nvda-columns.js`, `data/nvda-moves.json`: NVDA daily moves by kind of day (moves only, no prices)
+- `src/nhanes-columns.js`, `data/nhanes-blood-pressure.json`: blood pressure of US adults by group (CDC NHANES)
+- `src/dummy-columns.js`, `data/dummy-home-prices.json`: FICTIONAL demonstration data
+- `LICENSE`: MIT. `SECURITY.md`, `CONTRIBUTING.md`, `CHANGELOG.md`.
+
+## Licence and disclaimer
+
+The code is under the MIT licence, copyright 2026 4STREET, and is provided as is, with no warranty of any kind. Histostick is a trademark of 4STREET. The Histostick and 4STREET names and the logo are not covered by that licence.
+
+The bundled data sets are illustrations of what the chart can do. They are approximate, are not offered as findings, and are not investment, medical or legal advice.
+
+## About 4STREET
+
+4STREET is designed to bring Market Intelligence, Regulatory Compliance, while ensuring IP & PII is protected under the most sophisticated Agentic Workflows for Asset Managers and other heavily regulated firms. Histostick grew out of 4STREET's charting of enforcement data.
+
+- Site: https://its4street.com
+- Contact: contact@its4street.com
+- Source: https://github.com/its-4Street/histostick

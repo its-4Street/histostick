@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Histostick by 4STREET: a histogram and a candlestick in one chart</title>
+    <meta name="description" content="Histostick is an open-source chart from 4STREET: a histogram and a candlestick in one mark. Plain JavaScript and SVG, no packages." />
+    <meta name="theme-color" content="#282e39" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Histostick by 4STREET" />
+    <meta property="og:description" content="A histogram and a candlestick in one chart. Open source, plain JavaScript and SVG, no packages." />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="src/histostick.css" />
+    <link rel="stylesheet" href="src/style.css" />
+    <link rel="license" href="LICENSE" />
+    <!-- The same description as codemeta.json, for agents and search engines reading the page. Filled by scripts/sync-meta.mjs. -->
+    <script type="application/ld+json" id="about-data">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "Histostick",
+  "description": "A histogram and a candlestick in one chart. One column per series; inside each column a bar for every value band (bar width is how many values fall in it), a line from the smallest value to the largest, and a tick at the median. The columns can be reordered, grouped, combined and narrowed to a span of years. Plain JavaScript and SVG, with no packages and no build step.",
+  "version": "0.1.0",
+  "codeRepository": "https://github.com/its-4Street/histostick",
+  "issueTracker": "https://github.com/its-4Street/histostick/issues",
+  "dateCreated": "2026-11-19",
+  "license": "https://spdx.org/licenses/MIT",
+  "isAccessibleForFree": true,
+  "programmingLanguage": "JavaScript",
+  "runtimePlatform": "Web browser",
+  "softwareRequirements": "None. No packages. Node 18 or later is needed only for the optional local server and checks.",
+  "keywords": [
+    "chart",
+    "data visualization",
+    "histogram",
+    "candlestick",
+    "distribution",
+    "SVG",
+    "JavaScript",
+    "no dependencies"
+  ],
+  "usageInfo": "Provided as is, with no warranty of any kind (see the licence). The bundled data sets are illustrations of what the chart can do. They are approximate, are not offered as findings, and are not investment, medical or legal advice. The MIT licence covers the code; the data comes from the public sources named for each set; Histostick is a trademark of 4STREET, and the Histostick and 4STREET names and the logo are not covered by the licence.",
+  "author": {
+    "@id": "https://its4street.com/#organization"
+  },
+  "copyrightHolder": {
+    "@id": "https://its4street.com/#organization"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://its4street.com/#organization",
+    "name": "4STREET",
+    "legalName": "4STREET",
+    "slogan": "Intersect the Semantics",
+    "description": "4STREET is designed to bring Market Intelligence, Regulatory Compliance, while ensuring IP & PII is protected under the most sophisticated Agentic Workflows for Asset Managers and other heavily regulated firms.",
+    "url": "https://its4street.com",
+    "logo": "https://its4street.com/logo.png",
+    "foundingDate": "2024",
+    "email": "contact@its4street.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Chicago",
+      "addressRegion": "IL",
+      "addressCountry": "US"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/company/its4street",
+      "https://x.com/its4street"
+    ]
+  },
+  "hasPart": [
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "histostick.js",
+      "description": "The chart itself. Exports mountChart (draws into an element, with the menus and year slider), buildChart (returns the SVG markup and the numbers without a browser), arrange, columnStats, yearsOf, withinYears and MONEY_BANDS. Its styles are in src/histostick.css. These two files are all the chart needs.",
+      "url": "src/histostick.js",
+      "programmingLanguage": "JavaScript"
+    },
+    {
+      "@type": "Dataset",
+      "name": "SEC respondents sample",
+      "description": "Illustrative. 223 respondents in US Securities and Exchange Commission enforcement actions with money ordered against them, a 1 in 10 sample. Each row is an amount in dollars, the date the amount was set, and the SEC office code. No names or case numbers.",
+      "url": "src/sec-data.js",
+      "isBasedOn": "Public documents of the US Securities and Exchange Commission, compiled by 4STREET.",
+      "creator": {
+        "@id": "https://its4street.com/#organization"
+      }
+    },
+    {
+      "@type": "Dataset",
+      "name": "NVDA daily moves",
+      "description": "Illustrative. The daily percentage move of NVIDIA Corporation shares for 1,466 sessions, 2021-01-21 to 2026-11-19, with each day's volume against its recent average and flags for month end, after a holiday, the week after earnings and ex-dividend days. Moves only: prices and volumes are not included. Earnings dates are approximate.",
+      "url": "data/nvda-moves.json",
+      "isBasedOn": "Daily closing prices and volumes published by Yahoo Finance.",
+      "temporalCoverage": "2021-01-21/2026-11-19"
+    },
+    {
+      "@type": "Dataset",
+      "name": "NHANES adult systolic blood pressure",
+      "description": "Illustrative. Systolic blood pressure of 21,893 adults examined in the National Health and Nutrition Examination Survey, cycles 2011-2012 to 2017-2018, with age, sex, body mass index and family income against the poverty line. No participant identifiers. Counts of examined people, not national estimates: sampling weights are not applied.",
+      "url": "data/nhanes-blood-pressure.json",
+      "isBasedOn": "https://wwwn.cdc.gov/nchs/nhanes/",
+      "creator": {
+        "@type": "Organization",
+        "name": "Centers for Disease Control and Prevention, National Center for Health Statistics"
+      },
+      "temporalCoverage": "2011/2018"
+    },
+    {
+      "@type": "Dataset",
+      "name": "Home prices (fictional)",
+      "description": "FICTIONAL demonstration data: price change in a year for homes with a 2 in the address, by city. The cities do not exist and every number comes from a seeded random generator.",
+      "url": "data/dummy-home-prices.json",
+      "creator": {
+        "@id": "https://its4street.com/#organization"
+      }
+    }
+  ]
+}
+    </script>
+  </head>
+  <body>
+    <main>
+      <header class="masthead">
+        <h1>Histostick™</h1>
+        <a class="brand" href="https://its4street.com"><img src="assets/4street-logo.png" width="824" height="303" alt="4STREET, Intersect the Semantics" /></a>
+      </header>
+      <p class="lede">
+        Each column is one series: an office, a city, a kind of day. The bars show how many values fall in each band, the
+        vertical line runs from the smallest value to the largest, and the dashed line marks the median. Columns can
+        be reordered, grouped, or combined from the menus above each chart, and the year slider narrows it to a span of years.
+      </p>
+      <p class="lede">
+        The charts below show what the chart can do. Accuracy is not their point: the numbers are approximate and
+        are not offered as findings or advice.
+      </p>
+      <noscript>
+        <p class="warning">The charts on this page are drawn by JavaScript, which is switched off in this browser. The code and the data are in this folder; README.md describes them.</p>
+      </noscript>
+      <section class="panel">
+        <div id="by-office"></div>
+        <p class="note" id="by-office-note"></p>
+      </section>
+      <section class="panel">
+        <p class="flag">Fictional data</p>
+        <div id="by-city"></div>
+        <p class="note" id="by-city-note"></p>
+      </section>
+      <section class="panel">
+        <div id="by-day"></div>
+        <p class="note" id="by-day-note"></p>
+      </section>
+      <section class="panel">
+        <div id="by-group"></div>
+        <p class="note" id="by-group-note"></p>
+      </section>
+      <section class="about" id="about">
+        <a class="brand" href="https://its4street.com"><img src="assets/4street-logo.png" width="824" height="303" alt="4STREET, Intersect the Semantics" /></a>
+        <div>
+          <h2>Offered by 4STREET</h2>
+          <p>4STREET is designed to bring Market Intelligence, Regulatory Compliance, while ensuring IP &amp; PII is protected under the most sophisticated Agentic Workflows for Asset Managers and other heavily regulated firms.</p>
+          <p>
+            Histostick grew out of 4STREET's charting of enforcement data. The code is open under the
+            <a href="LICENSE">MIT licence</a> and is provided as is, with no warranty of any kind. The data shown here
+            comes from public sources, except the chart marked fictional, and is for illustration only. Histostick is a
+            trademark of 4STREET; the Histostick and 4STREET names and the logo are not covered by the licence.
+          </p>
+          <p class="links">
+            <a href="https://its4street.com">its4street.com</a>
+            <a href="mailto:contact@its4street.com">contact@its4street.com</a>
+            <a href="https://github.com/its-4Street/histostick">Source code</a>
+            <a href="codemeta.json">Structured data</a>
+          </p>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="src/page.js"></script>
+  </body>
+</html>

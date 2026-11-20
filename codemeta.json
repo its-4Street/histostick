@@ -1,0 +1,74 @@
+{
+  "@context": "https://w3id.org/codemeta/3.0",
+  "@type": "SoftwareSourceCode",
+  "name": "Histostick",
+  "description": "A histogram and a candlestick in one chart. One column per series; inside each column a bar for every value band (bar width is how many values fall in it), a line from the smallest value to the largest, and a tick at the median. The columns can be reordered, grouped, combined and narrowed to a span of years. Plain JavaScript and SVG, with no packages and no build step.",
+  "version": "0.1.0",
+  "codeRepository": "https://github.com/its-4Street/histostick",
+  "issueTracker": "https://github.com/its-4Street/histostick/issues",
+  "dateCreated": "2026-11-19",
+  "license": "https://spdx.org/licenses/MIT",
+  "isAccessibleForFree": true,
+  "programmingLanguage": "JavaScript",
+  "runtimePlatform": "Web browser",
+  "softwareRequirements": "None. No packages. Node 18 or later is needed only for the optional local server and checks.",
+  "keywords": ["chart", "data visualization", "histogram", "candlestick", "distribution", "SVG", "JavaScript", "no dependencies"],
+  "usageInfo": "Provided as is, with no warranty of any kind (see the licence). The bundled data sets are illustrations of what the chart can do. They are approximate, are not offered as findings, and are not investment, medical or legal advice. The MIT licence covers the code; the data comes from the public sources named for each set; Histostick is a trademark of 4STREET, and the Histostick and 4STREET names and the logo are not covered by the licence.",
+  "author": { "@id": "https://its4street.com/#organization" },
+  "copyrightHolder": { "@id": "https://its4street.com/#organization" },
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://its4street.com/#organization",
+    "name": "4STREET",
+    "legalName": "4STREET",
+    "slogan": "Intersect the Semantics",
+    "description": "4STREET is designed to bring Market Intelligence, Regulatory Compliance, while ensuring IP & PII is protected under the most sophisticated Agentic Workflows for Asset Managers and other heavily regulated firms.",
+    "url": "https://its4street.com",
+    "logo": "https://its4street.com/logo.png",
+    "foundingDate": "2024",
+    "email": "contact@its4street.com",
+    "address": { "@type": "PostalAddress", "addressLocality": "Chicago", "addressRegion": "IL", "addressCountry": "US" },
+    "sameAs": ["https://www.linkedin.com/company/its4street", "https://x.com/its4street"]
+  },
+  "hasPart": [
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "histostick.js",
+      "description": "The chart itself. Exports mountChart (draws into an element, with the menus and year slider), buildChart (returns the SVG markup and the numbers without a browser), arrange, columnStats, yearsOf, withinYears and MONEY_BANDS. Its styles are in src/histostick.css. These two files are all the chart needs.",
+      "url": "src/histostick.js",
+      "programmingLanguage": "JavaScript"
+    },
+    {
+      "@type": "Dataset",
+      "name": "SEC respondents sample",
+      "description": "Illustrative. 223 respondents in US Securities and Exchange Commission enforcement actions with money ordered against them, a 1 in 10 sample. Each row is an amount in dollars, the date the amount was set, and the SEC office code. No names or case numbers.",
+      "url": "src/sec-data.js",
+      "isBasedOn": "Public documents of the US Securities and Exchange Commission, compiled by 4STREET.",
+      "creator": { "@id": "https://its4street.com/#organization" }
+    },
+    {
+      "@type": "Dataset",
+      "name": "NVDA daily moves",
+      "description": "Illustrative. The daily percentage move of NVIDIA Corporation shares for 1,466 sessions, 2021-01-21 to 2026-11-19, with each day's volume against its recent average and flags for month end, after a holiday, the week after earnings and ex-dividend days. Moves only: prices and volumes are not included. Earnings dates are approximate.",
+      "url": "data/nvda-moves.json",
+      "isBasedOn": "Daily closing prices and volumes published by Yahoo Finance.",
+      "temporalCoverage": "2021-01-21/2026-11-19"
+    },
+    {
+      "@type": "Dataset",
+      "name": "NHANES adult systolic blood pressure",
+      "description": "Illustrative. Systolic blood pressure of 21,893 adults examined in the National Health and Nutrition Examination Survey, cycles 2011-2012 to 2017-2018, with age, sex, body mass index and family income against the poverty line. No participant identifiers. Counts of examined people, not national estimates: sampling weights are not applied.",
+      "url": "data/nhanes-blood-pressure.json",
+      "isBasedOn": "https://wwwn.cdc.gov/nchs/nhanes/",
+      "creator": { "@type": "Organization", "name": "Centers for Disease Control and Prevention, National Center for Health Statistics" },
+      "temporalCoverage": "2011/2018"
+    },
+    {
+      "@type": "Dataset",
+      "name": "Home prices (fictional)",
+      "description": "FICTIONAL demonstration data: price change in a year for homes with a 2 in the address, by city. The cities do not exist and every number comes from a seeded random generator.",
+      "url": "data/dummy-home-prices.json",
+      "creator": { "@id": "https://its4street.com/#organization" }
+    }
+  ]
+}
