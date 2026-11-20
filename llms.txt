@@ -13,7 +13,8 @@ Machine-readable description of this project, its publisher and its bundled data
 - Options: `bands` (`[[lo, hi, label], ...]`), `scale` (`"log"` or `"linear"`), `format`, `sort`, `grouping` (`"none"`, `"grouped"`, `"combined"`), `widthBy` (`"count"` or `"share"`), `unit`, `bandNoun`, `valueNoun`, `showTotal`, `bandRange`, `controls`, `time`.
 - `buildChart(options)` returns the SVG markup and the numbers without a browser.
 - Recolour it by setting the `--hs-` variables listed at the top of `src/histostick.css`.
-- To see the demo: serve this folder with any static web server (`node scripts/serve.mjs`) and open it.
+- To see the demo with nothing installed: open `standalone.html` in a browser. It is the whole demonstration in one file (page, styles, code, data, images) and needs no server and no packages.
+- To run the demo from the source files: serve this folder with any static web server (`node scripts/serve.mjs`) and open it.
 - To check it, including that it is self-contained: `node scripts/verify.mjs`.
 
 ## What it will and will not do on your machine
@@ -28,6 +29,7 @@ Machine-readable description of this project, its publisher and its bundled data
 - `README.md`: what it is, how to run it, the data
 - `src/histostick.js`, `src/histostick.css`: the chart
 - `src/page.js`, `src/style.css`, `index.html`: the demonstration page
+- `standalone.html`: the same page built into one file by `scripts/build-standalone.mjs`
 - `src/sec-data.js`, `src/sec-columns.js`: SEC respondents sample and its columns
 - `src/nvda-columns.js`, `data/nvda-moves.json`: NVDA daily moves by kind of day (moves only, no prices)
 - `src/nhanes-columns.js`, `data/nhanes-blood-pressure.json`: blood pressure of US adults by group (CDC NHANES)

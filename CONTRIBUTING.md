@@ -18,7 +18,8 @@ Thank you for looking. A few things keep this project what it is.
     node scripts/verify.mjs
 
 Every check must pass. If you change `codemeta.json`, run `node scripts/sync-meta.mjs` so the page's structured data
-matches. Add a line to `CHANGELOG.md`.
+matches. If you change the page, the chart, the styles or the data, run `node scripts/build-standalone.mjs` so
+`standalone.html` (the zero-dependency one-file page) matches. Add a line to `CHANGELOG.md`.
 
 ## Licence of contributions
 

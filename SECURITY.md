@@ -15,6 +15,9 @@ clone or copy the project, so there is no supply chain behind it to compromise.
 - does not use `eval`, `new Function` or `document.write`, and every piece of text it inserts into the page is
   escaped first.
 
+`standalone.html` is the same page with those files written into it, so it opens straight from disk and loads
+nothing at all, not even from its own folder: a zero-dependency proof of concept.
+
 The only links that leave the folder are ordinary links a reader has to click: 4STREET's site, its email address and this project's source repository.
 
 **The scripts** in `scripts/` are optional and use Node's built-in modules only:
@@ -22,7 +25,7 @@ The only links that leave the folder are ordinary links a reader has to click: 4
 - `serve.mjs` serves this folder to this machine alone (it listens on 127.0.0.1) and refuses any path outside the
   folder;
 - `verify.mjs` reads the project's files and starts that same server briefly on a spare port to test it;
-- `sync-meta.mjs` and `make-dummy.mjs` rewrite files inside this folder;
+- `sync-meta.mjs`, `build-standalone.mjs` and `make-dummy.mjs` rewrite files inside this folder;
 - `extract-nhanes.mjs` reads data files you point it at and writes one file inside this folder.
 
 None of them runs another program, opens a connection to another machine, or reads your environment.

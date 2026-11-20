@@ -19,7 +19,12 @@ Plain JavaScript and SVG: no packages, no install, no build step, nothing loaded
 
 Offered as open source by [4STREET](https://its4street.com) under the MIT licence, as is.
 
-## Run the demo
+## See it without installing or running anything
+
+Open `standalone.html` in a browser (double-click it). That one file holds the whole demonstration: the page, the
+styles, the chart code, the data and the images. It needs no server, no Node, no packages and no network.
+
+## Run the demo from the source files
 
     git clone https://github.com/its-4Street/histostick.git
     cd histostick
@@ -91,6 +96,7 @@ approximate, they are not offered as findings, and they are not investment, medi
     scripts/serve.mjs             a local static server (this machine only)
     scripts/verify.mjs            the checks
     scripts/sync-meta.mjs         copies codemeta.json into the page's structured data block
+    scripts/build-standalone.mjs  rebuilds standalone.html from index.html, src/, data/ and assets/
     scripts/make-dummy.mjs        regenerates the fictional set
     scripts/extract-nhanes.mjs    rebuilds the blood pressure set from the CDC's files
     codemeta.json, llms.txt       descriptions for machines and agents

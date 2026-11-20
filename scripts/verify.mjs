@@ -14,6 +14,7 @@ import { nvdaColumns, MOVE_BANDS, RULES, FLAGS } from "../src/nvda-columns.js";
 import { nhanesColumns, PRESSURE_BANDS, mmHg } from "../src/nhanes-columns.js";
 import { SETS } from "./make-dummy.mjs";
 import { start } from "./serve.mjs";
+import { buildStandalone } from "./build-standalone.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const read = (p) => readFileSync(resolve(root, p), "utf8");
@@ -291,9 +292,25 @@ ok("the scripts use Node built-ins only: they run no other program, open no outs
   for (const [, address] of read("scripts/verify.mjs").matchAll(/fetch\(([^)]*)\)/g)) assert.ok(address.startsWith("base"), address);
 });
 
+ok("standalone.html is current, holds everything it needs, and loads nothing from anywhere (zero dependencies)", () => {
+  const page = read("standalone.html");
+  assert.equal(page, buildStandalone(), "standalone.html is out of date: run node scripts/build-standalone.mjs");
+  // every src is written into the file itself; the only hrefs are the icon (also written in), files beside it, and the same clickable links as index.html
+  for (const [, address] of page.matchAll(/<(?:script|img|link|iframe|source)\b[^>]*?\s(?:src|href)="([^"]*)"/g)) {
+    assert.ok(address.startsWith("data:") || address === "LICENSE", `standalone.html loads ${address.slice(0, 60)}`);
+  }
+  assert.ok(!/<link\b[^>]*rel="stylesheet"/.test(page) && !/<script\b[^>]*\ssrc=/.test(page));
+  assert.ok(!/@import|url\(/.test(page.match(/<style>([\s\S]*?)<\/style>/)[1]));
+  for (const file of ["data/dummy-home-prices.json", "data/nvda-moves.json", "data/nhanes-blood-pressure.json"]) {
+    const block = page.match(new RegExp(`<script type="application/json" id="${file}">([\\s\\S]*?)</script>`));
+    assert.ok(block, `${file} is not written into standalone.html`);
+    assert.deepEqual(JSON.parse(block[1]), JSON.parse(read(file)));
+  }
+});
+
 ok("nothing shipped names a folder on someone's machine; the images are what they claim to be", () => {
   const text = (f) => ![".png"].includes(extname(f));
-  for (const file of [...shipped.filter(text), "index.html", "README.md", "SECURITY.md", "CONTRIBUTING.md", "CHANGELOG.md", "codemeta.json", "llms.txt", "LICENSE"]) {
+  for (const file of [...shipped.filter(text), "index.html", "standalone.html", "README.md", "SECURITY.md", "CONTRIBUTING.md", "CHANGELOG.md", "codemeta.json", "llms.txt", "LICENSE"]) {
     const body = read(file);
     assert.ok(!body.includes(j("/ho", "me/")) && !body.includes(j("/Us", "ers/")) && !/[A-Z]:\\\\/.test(body), `${file} names a local folder`);
   }

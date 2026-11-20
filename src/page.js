@@ -6,8 +6,13 @@ import { dummyColumns, CHANGE_BANDS, percent } from "./dummy-columns.js";
 import { nvdaColumns, MOVE_BANDS, RULES } from "./nvda-columns.js";
 import { nhanesColumns, PRESSURE_BANDS, mmHg } from "./nhanes-columns.js";
 
-/** Loads a data file from this folder (a relative address, never another site). */
+/**
+ * Loads a data file from this folder (a relative address, never another site).
+ * In standalone.html (the zero-dependency one-file page) the same data is already written into the page, in a block named after the file.
+ */
 async function load(file) {
+  const written = document.getElementById(file);
+  if (written) return JSON.parse(written.textContent);
   const response = await fetch(file);
   if (!response.ok) throw new Error(`${file}: ${response.status}`);
   return response.json();
