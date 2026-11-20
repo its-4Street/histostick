@@ -297,8 +297,10 @@ ok("nothing shipped names a folder on someone's machine; the images are what the
     const body = read(file);
     assert.ok(!body.includes(j("/ho", "me/")) && !body.includes(j("/Us", "ers/")) && !/[A-Z]:\\\\/.test(body), `${file} names a local folder`);
   }
-  const png = readFileSync(resolve(root, "assets/4street-logo.png"));
-  assert.deepEqual([...png.subarray(0, 8)], [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
+  for (const image of shipped.filter((f) => f.endsWith(".png"))) {
+    const png = readFileSync(resolve(root, image));
+    assert.deepEqual([...png.subarray(0, 8)], [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a], image);
+  }
   const icon = read("assets/favicon.svg");
   assert.ok(icon.trimStart().startsWith("<svg") && !/<script|\son[a-z]+=|href=|<foreignObject/i.test(icon));
 });

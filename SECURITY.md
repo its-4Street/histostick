@@ -2,7 +2,7 @@
 
 ## What this project can and cannot do on your machine
 
-Histostick is a set of plain text files and one image. There is no installer and nothing runs by itself.
+Histostick is a set of plain text files and two images (the logo and a snapshot of the page). There is no installer and nothing runs by itself.
 
 **No dependencies.** There is no `package.json`, no lock file and no `node_modules`. Nothing is downloaded when you
 clone or copy the project, so there is no supply chain behind it to compromise.
@@ -33,7 +33,7 @@ None of them runs another program, opens a connection to another machine, or rea
 
 Besides the chart's numbers, this fails if any file gains an address on another site, a non-relative import, a
 package manifest, a call that could run code from text, browser storage, or a script that reaches beyond Node's
-built-ins. It also checks that the one image is a real PNG.
+built-ins. It also checks that each image is a real PNG.
 
 Releases carry a `SHA256SUMS` file listing every file's checksum. To confirm a copy is unaltered:
 

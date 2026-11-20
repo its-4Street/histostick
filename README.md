@@ -1,5 +1,9 @@
 # Histostick™
 
+![The demonstration page: the Histostick chart of money per respondent, by SEC office](assets/preview.png)
+
+*A snapshot of the demonstration page, as it looks when you run it.*
+
 A histogram and a candlestick in one mark. One column per series (an office, a city, a kind of day). Inside each column:
 
 - **bars**: one per band present in the data; bar width is how many values fall in that band, with the count beside it
@@ -83,7 +87,7 @@ approximate, they are not offered as findings, and they are not investment, medi
     src/sec-data.js               the SEC sample, one row per line
     src/*-columns.js              each data set turned into chart columns
     data/                         the other data sets
-    assets/                       the 4STREET logo and the page icon
+    assets/                       the 4STREET logo, the page icon and the snapshot shown above
     scripts/serve.mjs             a local static server (this machine only)
     scripts/verify.mjs            the checks
     scripts/sync-meta.mjs         copies codemeta.json into the page's structured data block

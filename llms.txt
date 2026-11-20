@@ -32,6 +32,7 @@ Machine-readable description of this project, its publisher and its bundled data
 - `src/nvda-columns.js`, `data/nvda-moves.json`: NVDA daily moves by kind of day (moves only, no prices)
 - `src/nhanes-columns.js`, `data/nhanes-blood-pressure.json`: blood pressure of US adults by group (CDC NHANES)
 - `src/dummy-columns.js`, `data/dummy-home-prices.json`: FICTIONAL demonstration data
+- `assets/preview.png`: a snapshot of the demonstration page
 - `LICENSE`: MIT. `SECURITY.md`, `CONTRIBUTING.md`, `CHANGELOG.md`.
 
 ## Licence and disclaimer
